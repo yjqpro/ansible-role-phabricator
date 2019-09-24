@@ -1,0 +1,22 @@
+---
+
+- name: Clone chineses translation repo
+  become: yes
+  become_user: "{{ phabricator_phd_user }}"
+  git: 
+    repo: https://github.com/wanthings/phabricator-zh_CN.git
+    dest: "{{ phabricator_home_directory }}/phabricator-zh_CN"
+
+- name: Copy PhabricatorCNChineseTranslation.php files to phabricator extensions directory
+  become: yes
+  become_user: "{{ phabricator_phd_user }}"
+  command: >
+    cp "{{ phabricator_home_directory }}/phabricator-zh_CN/PhabricatorCNChineseTranslation.php"
+    "{{ phabricator_install_directory }}/src/extensions/PhabricatorCNChineseTranslation.php"
+
+- name: Copy PhutilCNChineseLocale.php files to phabricator extensions directory
+  become: yes
+  become_user: "{{ phabricator_phd_user }}"
+  command: >
+    cp  "{{ phabricator_home_directory }}/phabricator-zh_CN/PhutilCNChineseLocale.php"
+    "{{ phabricator_install_directory }}/src/extensions/PhutilCNChineseLocale.php"
