@@ -1,12 +1,7 @@
 ---
 - name: Add site for the app under development
-  template: src=nginx.site.conf.j2
-            dest=/etc/nginx/sites-available/site.conf
-
-- name: Activate the app
-  file: src=/etc/nginx/sites-available/site.conf
-        dest=/etc/nginx/sites-enabled/site.conf
-        state=link
+  template: 'src=nginx.site.conf.j2
+    dest=/etc/nginx/conf.d/{{ phabricator_hostname }}.conf'
 
 - service:
     name: nginx
